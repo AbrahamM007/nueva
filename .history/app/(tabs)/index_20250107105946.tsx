@@ -1259,7 +1259,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#6B705C",
   },
-  modalContainer: { flex: 1, backgroundColor: "#D8F3DF", justifyContent: "center", alignItems: "center" },
+  modalContainer: { flex: 1, backgroundColor: "#6B70", justifyContent: "center", alignItems: "center" },
   modalCard: { width: "85%", backgroundColor: "#FFFFFF", borderRadius: 20, padding: 20 },
   modalTitle: { fontSize: 18, fontWeight: "bold", color: "#2D6A4F", marginBottom: 10 },
   modalInput: { borderWidth: 1, borderColor: "#E4E4E4", borderRadius: 10, padding: 10, fontSize: 16, color: "#000", marginBottom: 15 },

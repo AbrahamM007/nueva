@@ -399,21 +399,40 @@ const App: React.FC = () => {
   // 9. YouTube or Home Data
   // ----------------------
   const fetchLatestVideo = async () => {
-    try {
-      setLoadingVideo(true);
-      const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAMm62FfBdjiChsFajOIIHahwNuPfUId3s&channelId=UCzohr1VLqaLFKoZCdKsHvoQ&part=snippet,id&order=date&maxResults=1`
-      );
-      const data = await response.json();
-      if (data.items && data.items.length > 0) {
-        setLatestVideoId(data.items[0].id.videoId);
-      }
-    } catch (error) {
-      Alert.alert("Error", "Failed to fetch the latest video.");
-    } finally {
-      setLoadingVideo(false);
-    }
-  };
+        try {
+          setLoadingVideo(true);
+          const response = await fetch(
+            `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAMm62FfBdjiChsFajOIIHahwNuPfUId3s&channelId=UCzohr1VLqaLFKoZCdKsHvoQ&part=snippet,id&order=date&maxResults=1`
+          );
+          const data = await response.json();
+          if (data.items && data.items.length > 0) {
+            setLatestVideoId(data.items[0].id.videoId);
+    -      }
+    -    } catch (error) {
+    -      Alert.alert("Error", "Failed to fetch the latest video.");
+    -    } finally {
+    -      setLoadingVideo(false);
+    -    }
+    -  };
+    +  const fetchLatestVideo = async () => {
+    +    try {
+    +      setLoadingVideo(true);
+    +      const response = await fetch(
+    +        `https://www.googleapis.com/youtube/v3/search?key=YOUR_API_KEY&channelId=UCzohr1VLqaLFKoZCdKsHvoQ&part=snippet,id&order=date&maxResults=10`
+    +      );
+    +      const data = await response.json();
+    +      if (data.items && data.items.length > 0) {
+    +        // The first video is the most recent one
+    +        setLatestVideoId(data.items[0].id.videoId);
+    +        // The rest are past videos
+    +        setPastVideos(data.items.slice(1));
+    +      }
+        } catch (error) {
+          Alert.alert("Error", "Failed to fetch the latest video.");
+        } finally {
+          setLoadingVideo(false);
+        }
+      };
 
   // ----------------------
   // 10. Renderers
@@ -535,127 +554,20 @@ const App: React.FC = () => {
   };
 
   const renderMinistryPage = () => {
-    const handleAddMinistry = () => {
-      setShowMinistryModal(true);
-    };
-  
     return (
       <View style={styles.appContainer}>
-        <View style={styles.sectionHeaderRow}>
-          <Text style={styles.mainTitle}>Ministries</Text>
-          <TouchableOpacity style={styles.addButton} onPress={handleAddMinistry}>
-            <Ionicons name="add" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={ministries}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.ministryCard}>
-              <Text style={styles.ministryTitle}>{item.title}</Text>
-              <Text style={styles.ministryDescription}>{item.description}</Text>
-            </View>
-          )}
-          ListEmptyComponent={<Text style={styles.text}>No ministries available.</Text>}
-          contentContainerStyle={styles.ministryList}
-        />
-        {showMinistryModal && (
-          <Modal transparent={true} animationType="slide" visible={showMinistryModal}>
-            <View style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Add New Ministry</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Ministry Title"
-                value={ministryTitle}
-                onChangeText={setMinistryTitle}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Ministry Description"
-                value={ministryDescription}
-                onChangeText={setMinistryDescription}
-              />
-              <TouchableOpacity style={styles.saveButton} onPress={handleCreateMinistry}>
-                <Text style={styles.saveButtonText}>Save</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cancelButton} onPress={() => setShowMinistryModal(false)}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
-        )}
+        <Text>Ministry Page Placeholder</Text>
       </View>
     );
   };
-  
 
   const renderEventsPage = () => {
-    const handleAddEvent = () => {
-      setShowEventModal(true);
-    };
-  
     return (
       <View style={styles.appContainer}>
-        <View style={styles.sectionHeaderRow}>
-          <Text style={styles.mainTitle}>Events</Text>
-          <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
-            <Ionicons name="add" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={events}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.eventCard}>
-              <Text style={styles.eventTitle}>{item.title}</Text>
-              <Text style={styles.eventDate}>{item.date} @ {item.time}</Text>
-              <Text style={styles.eventDescription}>{item.description}</Text>
-            </View>
-          )}
-          ListEmptyComponent={<Text style={styles.text}>No events available.</Text>}
-          contentContainerStyle={styles.eventList}
-        />
-        {showEventModal && (
-          <Modal transparent={true} animationType="slide" visible={showEventModal}>
-            <View style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Add New Event</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Event Title"
-                value={eventTitle}
-                onChangeText={setEventTitle}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Event Date"
-                value={eventDate}
-                onChangeText={setEventDate}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Event Time"
-                value={eventTime}
-                onChangeText={setEventTime}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Event Description"
-                value={eventDescription}
-                onChangeText={setEventDescription}
-              />
-              <TouchableOpacity style={styles.saveButton} onPress={handleCreateEvent}>
-                <Text style={styles.saveButtonText}>Save</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cancelButton} onPress={() => setShowEventModal(false)}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
-        )}
+        <Text>Events Page Placeholder</Text>
       </View>
     );
   };
-  
 
   const renderServicesPage = () => {
     const sortedServices = [...services].sort((a, b) => parseInt(b.id) - parseInt(a.id));
@@ -1104,7 +1016,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    width: "90%",
+    width: "100%",
     borderWidth: 1,
     borderColor: "#E4E4E4",
     borderRadius: 10,
@@ -1259,7 +1171,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#6B705C",
   },
-  modalContainer: { flex: 1, backgroundColor: "#D8F3DF", justifyContent: "center", alignItems: "center" },
+  profileHeader: { fontSize: 24, fontWeight: "bold", color: "#2D6A4F", textAlign: "center", marginBottom: 16 },
+  profileTopSection: { flexDirection: "row", alignItems: "center", marginBottom: 20, paddingHorizontal: 16 },
+  profileImage: { width: 80, height: 80, borderRadius: 40, marginRight: 16 },
+  profileInfo: { flex: 1 },
+  profileName: { fontSize: 20, fontWeight: "bold", color: "#2D6A4F", marginBottom: 4 },
+  profileBio: { fontSize: 14, color: "#2D6A4F" },
+  profileIconButton: { flexDirection: "row", backgroundColor: "#B7E4C7", borderRadius: 20, padding: 10, alignItems: "center", marginLeft: 16 },
+  logoutButton: { backgroundColor: "#FF6B6B", borderRadius: 10, paddingVertical: 10, alignItems: "center", margin: 16 },
+  logoutButtonText: { color: "#FFFFFF", fontSize: 18, fontWeight: "bold" },
+  bottomNav: { flexDirection: "row", justifyContent: "space-around", alignItems: "center", paddingVertical: 10, borderTopWidth: 1, borderTopColor: "#E4E4E4" },
+  navItem: { alignItems: "center" },
+  navIconContainer: { padding: 8, borderRadius: 20, marginBottom: 4 },
+  navIconActive: { backgroundColor: "#B7E4C7" },
+  navText: { fontSize: 14, fontWeight: "500", color: "#2D6A4F" },
+  navTextActive: { fontWeight: "bold" },
+  modalContainer: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)", justifyContent: "center", alignItems: "center" },
   modalCard: { width: "85%", backgroundColor: "#FFFFFF", borderRadius: 20, padding: 20 },
   modalTitle: { fontSize: 18, fontWeight: "bold", color: "#2D6A4F", marginBottom: 10 },
   modalInput: { borderWidth: 1, borderColor: "#E4E4E4", borderRadius: 10, padding: 10, fontSize: 16, color: "#000", marginBottom: 15 },
@@ -1267,103 +1194,7 @@ const styles = StyleSheet.create({
   modalCancelButton: { backgroundColor: "#FF6B6B", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 20 },
   modalSaveButton: { backgroundColor: "#2D6A4F", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 20 },
   modalButtonText: { color: "#FFFFFF", fontSize: 16, fontWeight: "600" },
-  ministryList: { paddingHorizontal: 16, paddingBottom: 20 },
-  ministryCard: {
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  ministryTitle: { fontSize: 18, fontWeight: "bold", color: "#2D6A4F", marginBottom: 4 },
-  ministryDescription: { fontSize: 14, color: "#374151" },
-  bibleText: {
-    fontSize: 16,
-    color: "#2D6A4F",
-    textAlign: "center",
-  },
-  saveButton: {
-    backgroundColor: "#2D6A4F",
-    padding: 12,
-    borderRadius: 8,
-    marginVertical: 8,
-  },
-  saveButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  cancelButton: {
-    backgroundColor: "#FF6B6B",
-    padding: 12,
-    borderRadius: 8,
-    marginVertical: 8,
-  },
-  cancelButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  eventList: {
-    paddingHorizontal: 16,
-    paddingBottom: 20,
-  },
-  profileHeader: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#2D6A4F",
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  profileTopSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-    paddingHorizontal: 16,
-  },
-  profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginRight: 16,
-  },
-  profileInfo: {
-    flex: 1,
-  },
-  profileName: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2D6A4F",
-    marginBottom: 4,
-  },
-  profileBio: {
-    fontSize: 14,
-    color: "#2D6A4F",
-  },
-  profileIconButton: {
-    flexDirection: "row",
-    backgroundColor: "#B7E4C7",
-    borderRadius: 20,
-    padding: 10,
-    alignItems: "center",
-    marginLeft: 16,
-  },
-  logoutButton: {
-    backgroundColor: "#FF6B6B",
-    borderRadius: 10,
-    paddingVertical: 10,
-    alignItems: "center",
-    margin: 16,
-  },
-  logoutButtonText: {
-    color: "#FFFFFF",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
+  bibleText: { fontSize: 16, color: "#2D6A4F" },
   chatUserItem: {
     padding: 15,
     borderBottomWidth: 1,
@@ -1411,35 +1242,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
   },
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#E4E4E4",
-  },
-  navItem: {
-    alignItems: "center",
-  },
-  navIconContainer: {
-    padding: 8,
-    borderRadius: 20,
-    marginBottom: 4,
-  },
-  navIconActive: {
-    backgroundColor: "#B7E4C7",
-  },
-  navText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#2D6A4F",
-  },
-  navTextActive: {
-    fontWeight: "bold",
-  },
-  
 });
-
 
 export default App;

@@ -29,9 +29,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* Apply global headerShown: false */}
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
+      <Stack>
+        {/* Hide the top header for your index page */}
+        <Stack.Screen 
+          name="(tabs)" 
+          options={{ 
+            headerShown: false  // Hides the top navigation header
+          }} 
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

@@ -1259,7 +1259,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#6B705C",
   },
-  modalContainer: { flex: 1, backgroundColor: "#D8F3DF", justifyContent: "center", alignItems: "center" },
+  modalContainer: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)", justifyContent: "center", alignItems: "center" },
   modalCard: { width: "85%", backgroundColor: "#FFFFFF", borderRadius: 20, padding: 20 },
   modalTitle: { fontSize: 18, fontWeight: "bold", color: "#2D6A4F", marginBottom: 10 },
   modalInput: { borderWidth: 1, borderColor: "#E4E4E4", borderRadius: 10, padding: 10, fontSize: 16, color: "#000", marginBottom: 15 },
@@ -1275,170 +1275,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 4,
   },
   ministryTitle: { fontSize: 18, fontWeight: "bold", color: "#2D6A4F", marginBottom: 4 },
   ministryDescription: { fontSize: 14, color: "#374151" },
-  bibleText: {
-    fontSize: 16,
-    color: "#2D6A4F",
-    textAlign: "center",
-  },
-  saveButton: {
-    backgroundColor: "#2D6A4F",
-    padding: 12,
-    borderRadius: 8,
-    marginVertical: 8,
-  },
-  saveButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  cancelButton: {
-    backgroundColor: "#FF6B6B",
-    padding: 12,
-    borderRadius: 8,
-    marginVertical: 8,
-  },
-  cancelButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  eventList: {
-    paddingHorizontal: 16,
-    paddingBottom: 20,
-  },
-  profileHeader: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#2D6A4F",
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  profileTopSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-    paddingHorizontal: 16,
-  },
-  profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginRight: 16,
-  },
-  profileInfo: {
-    flex: 1,
-  },
-  profileName: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2D6A4F",
-    marginBottom: 4,
-  },
-  profileBio: {
-    fontSize: 14,
-    color: "#2D6A4F",
-  },
-  profileIconButton: {
-    flexDirection: "row",
-    backgroundColor: "#B7E4C7",
-    borderRadius: 20,
-    padding: 10,
-    alignItems: "center",
-    marginLeft: 16,
-  },
-  logoutButton: {
-    backgroundColor: "#FF6B6B",
-    borderRadius: 10,
-    paddingVertical: 10,
-    alignItems: "center",
-    margin: 16,
-  },
-  logoutButtonText: {
-    color: "#FFFFFF",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  chatUserItem: {
-    padding: 15,
-    borderBottomWidth: 1,
-    borderColor: "#E4E4E4",
-  },
-  chatUserName: {
-    fontSize: 16,
-    color: "#2D6A4F",
-  },
-  chatMessageBubble: {
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 5,
-    maxWidth: "80%",
-  },
-  myMessage: {
-    backgroundColor: "#B7E4C7",
-    alignSelf: "flex-end",
-  },
-  theirMessage: {
-    backgroundColor: "#F8F8F8",
-    alignSelf: "flex-start",
-  },
-  chatMessageText: {
-    color: "#000",
-  },
-  chatInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    borderTopWidth: 1,
-    borderColor: "#E4E4E4",
-  },
-  chatInput: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "#E4E4E4",
-    borderRadius: 20,
-    padding: 10,
-    marginRight: 10,
-    backgroundColor: "#FFFFFF",
-  },
-  sendButton: {
-    backgroundColor: "#2D6A4F",
-    padding: 10,
-    borderRadius: 20,
-  },
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#E4E4E4",
-  },
-  navItem: {
-    alignItems: "center",
-  },
-  navIconContainer: {
-    padding: 8,
-    borderRadius: 20,
-    marginBottom: 4,
-  },
-  navIconActive: {
-    backgroundColor: "#B7E4C7",
-  },
-  navText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#2D6A4F",
-  },
-  navTextActive: {
-    fontWeight: "bold",
-  },
-  
 });
 
 
